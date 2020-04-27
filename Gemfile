@@ -33,6 +33,8 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'factory_bot_rails'
+  gem 'rubocop'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
@@ -47,3 +49,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'bcrypt', '~> 3.1.7'
+gem 'simple_form'
+gem 'state_machines'
+gem 'state_machines-activerecord'
