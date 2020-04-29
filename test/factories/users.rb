@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user, aliases: %i[author asignee] do
-    first_name 
-    last_name 
+    first_name
+    last_name
     password
-    email 
-    avatar 
+    email
+    avatar
   end
 end
