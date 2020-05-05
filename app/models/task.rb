@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  state_machine: initial => :new_task do
+  state_machine :initial => :new_task do
     state :new_task
     state :in_development
     state :in_qa
@@ -34,7 +34,7 @@ class Task < ApplicationRecord
       transition %i[new_task released] => :archived
     end
   end
-  
+
   belongs_to :author, class_name: 'User'
   belongs_to :assignee, class_name: 'User', optional: true
 
