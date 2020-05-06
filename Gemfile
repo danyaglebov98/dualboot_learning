@@ -56,3 +56,5 @@ gem 'simple_form'
 gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'slim-rails'
