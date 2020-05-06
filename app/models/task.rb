@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  state_machine :initial => :new_task do
+  state_machine initial: :new_task do
     state :new_task
     state :in_development
     state :in_qa
@@ -22,15 +22,15 @@ class Task < ApplicationRecord
       transition in_code_review: :ready_for_release
     end
 
-    event :put_ready_for_release do 
+    event :put_ready_for_release do
       transition ready_for_release: :released
     end
 
-    event :put_released do 
+    event :put_released do
       transition released: :archived
     end
 
-    event :put_archived do 
+    event :put_archived do
       transition %i[new_task released] => :archived
     end
   end
@@ -42,6 +42,4 @@ class Task < ApplicationRecord
   validates :description, presence: true
   validates :author, presence: true
   validates :description, length: { maximum: 500 }
-
-
 end
