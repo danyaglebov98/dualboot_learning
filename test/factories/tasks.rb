@@ -6,12 +6,10 @@ FactoryBot.define do
     description
 
     trait :have_author do
-      author
+      author factory: :manager
     end
     trait :have_asignee do
-      asignee
+      assignee factory: :developer
     end
-    factory :auhtor_task, traits: [:have_author]
-    factory :asignee_task, traits: [:have_asignee]
   end
 end
