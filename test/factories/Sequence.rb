@@ -5,7 +5,7 @@ FactoryBot.define do
     "login#{n}@mail.com"
   end
 
-  sequence(:string, aliases: %i[name first_name last_name password avatar description]) do |n|
+  sequence(:string, aliases: [:name, :first_name, :last_name, :password, :avatar, :description]) do |n|
     "str#{n}"
   end
 
