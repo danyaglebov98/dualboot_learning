@@ -10,8 +10,6 @@
      = csrf_meta_tags
      - if !Rails.env.development?
        = stylesheet_packs_with_chunks_tag "application", media: "all"
-
-
    body
      = javascript_packs_with_chunks_tag 'application'
      header.mdl-layout__header
@@ -32,7 +30,6 @@
            - else
              = link_to "Sign in", new_session_path, class: 'mdl-navigation__link'
              = link_to "Sign up", new_developers_path, class: 'mdl-navigation__link'
-
      main#main.mdl-layout__content
        .page-content
          = yield
