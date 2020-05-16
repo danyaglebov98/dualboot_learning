@@ -23,6 +23,6 @@ class Api::V1::ApplicationController < ApplicationController
 
     def per_page
         per = params.fetch(:per, 10).to_i
-        per > 100 ? 100:per
+        per > 100 ? 100 : per
     end
 end
