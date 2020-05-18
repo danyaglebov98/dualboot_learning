@@ -8,6 +8,7 @@ FactoryBot.define do
     trait :have_author do
       author factory: :manager
     end
+
     trait :have_asignee do
       asignee factory: :developer
     end
