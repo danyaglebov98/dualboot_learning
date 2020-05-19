@@ -1,5 +1,5 @@
-admin = Admin.find_or_create_by(first_name: 'admin', last_name: 'admin', email: 'admin@localhost.ru')
-admin.password = '87654321'
+admin = Admin.find_or_create_by(first_name: 'admin', last_name: 'admin', email: 'admin@localhost.com')
+admin.password = 'admin'
 admin.save
 
 60.times do |i|
