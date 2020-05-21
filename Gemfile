@@ -65,3 +65,6 @@ gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'responders'
 gem 'active_model_serializers'
+
+#Tasks
+gem 'js-routes'
