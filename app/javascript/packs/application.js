@@ -10,7 +10,7 @@ require('channels');
 import 'material-design-lite/material.js';
 
 import WebpackerReact from 'webpacker-react';
-import TaskBoard from './components/TaskBoard';
+import TaskBoard from 'components/TaskBoard';
 
 WebpackerReact.setup({ TaskBoard });
 // Uncomment to copy all static images under ../images to the output folder and reference
