@@ -27,6 +27,6 @@ class Api::V1::ApplicationController < Api::ApplicationController
   end
 
   def self.responder
-    JsonResponder
+    Responders::JsonResponder
   end
 end

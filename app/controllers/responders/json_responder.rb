@@ -1,4 +1,4 @@
-class JsonResponder < ActionController::Responder
+class Responders::JsonResponder < ActionController::Responder
   def api_behavior(*args, &block)
     if post?
       display(resource, status: :created)
