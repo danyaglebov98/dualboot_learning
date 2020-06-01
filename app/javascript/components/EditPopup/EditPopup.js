@@ -20,7 +20,11 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const styles = useStyles();
-
+  const action = (
+    <IconButton onClick={onClose}>
+      <CloseIcon />
+    </IconButton>
+  );
   useEffect(() => {
     onLoadCard(cardId).then(setTask);
   }, []);
@@ -53,11 +57,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
     <Modal className={styles.modal} open onClose={onClose}>
       <Card className={styles.root}>
         <CardHeader
-          action={
-            <IconButton onClick={onClose}>
-              <CloseIcon />
-            </IconButton>
-          }
+          action={action}
           title={isLoading ? 'Your task is loading. Please be patient.' : `Task # ${task.id} [${task.name}]`}
         />
         <CardContent>

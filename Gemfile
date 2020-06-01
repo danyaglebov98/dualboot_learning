@@ -29,7 +29,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'responders'
 gem 'active_model_serializers'
 
-#Tasks
+# Tasks
 gem 'js-routes'
 gem 'responders'
 
