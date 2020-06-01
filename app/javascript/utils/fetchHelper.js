@@ -60,6 +60,6 @@ export default {
   delete(url, json) {
     const body = decamelize(json);
 
-    return axios.delete(url, body).then(decamelize);
+    return axios.delete(url, body).then(camelize);
   },
 };
