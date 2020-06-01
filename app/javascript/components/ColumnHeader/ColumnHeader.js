@@ -20,41 +20,40 @@ const ColumnHeader = ({ column, onLoadMore }) => {
 
   const handleLoadMore = () => onLoadMore(id, currentPage + 1);
 
-  return (
-    <div className={styles.root}>
-      <div className={styles.title}>
-        <b>{title}</b> ({count}/{totalCount || '…'})
-      </div>
+  const showButton = () => {
+    if (count === totalCount) {
+      return null;
+    }
+    return (
       <div className={styles.actions}>
         <IconButton aria-label="Load more" onClick={() => handleLoadMore()}>
           <SystemUpdateAltIcon fontSize="small" />
         </IconButton>
       </div>
+    );
+  };
+
+  return (
+    <div className={styles.root}>
+      <div className={styles.title}>
+        <b>{title}</b> ({count}/{totalCount || '…'})
+      </div>
+      {showButton()}
     </div>
   );
 };
 
 ColumnHeader.propTypes = {
+  onLoadMore: PropTypes.func.isRequired,
   column: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    cards: PropTypes.oneOfType([
-      PropTypes.shape(),
-      PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-          state: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired,
-        }),
-      ),
-    ]).isRequired,
+    cards: PropTypes.array.isRequired,
     meta: PropTypes.shape({
       totalCount: PropTypes.number,
       currentPage: PropTypes.number,
-    }).isRequired,
+    }),
   }).isRequired,
-  onLoadMore: PropTypes.func.isRequired,
 };
 
 export default ColumnHeader;
