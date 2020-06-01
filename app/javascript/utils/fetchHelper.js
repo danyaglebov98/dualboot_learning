@@ -34,7 +34,6 @@ axios.interceptors.response.use(null, (error) => {
 
   return Promise.reject(error);
 });
-
 export default {
   get(url, params = {}) {
     return axios

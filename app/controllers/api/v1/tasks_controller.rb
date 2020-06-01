@@ -3,6 +3,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def index
     tasks = Task.
+      order(created_at: :desc).
       ransack(ransack_params).
       result.
       page(page).
@@ -27,7 +28,7 @@ end
   def update
     task = Task.find(params[:id])
     task.update(task_params)
-
+    debugger
     respond_with(task, serializer: TaskSerializer)
   end
 
@@ -41,6 +42,7 @@ end
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :assignee_id, :state_event)
+    params.require(:task).permit(:name, :description, :assignee_id,  :state_event)
+
   end
 end
