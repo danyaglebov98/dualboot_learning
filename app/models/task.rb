@@ -19,15 +19,15 @@ class Task < ApplicationRecord
     end
 
     event :put_in_code_review do
+      transition in_qa: :in_code_review
+    end
+
+    event :put_in_ready_for_release do
       transition in_code_review: :ready_for_release
     end
 
-    event :put_ready_for_release do
-      transition ready_for_release: :released
-    end
-
     event :put_released do
-      transition released: :archived
+      transition ready_for_release: :released
     end
 
     event :put_archived do
