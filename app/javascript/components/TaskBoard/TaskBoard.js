@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@lourenci/react-kanban';
 import { propOr } from 'ramda';
-
-import Task from 'components/Task';
-import TasksRepository from 'repositories/TaskRepository.js';
-import ColumnHeader from 'components/ColumnHeader';
-import Icon from '@material-ui/core/Icon';
-import Fab from '@material-ui/core/Fab';
-import useStyles from './useStyles';
-import TaskForm from 'forms/TaskForm';
+import AddButton from 'components/AddButton';
 import AddPopup from 'components/AddPopup';
+import EditPopup from 'components/EditPopup';
+import TaskForm from 'forms/TaskForm';
+import Task from 'components/Task';
+import TasksRepository from 'repositories/TaskRepository';
+import ColumnHeader from 'components/ColumnHeader';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -20,11 +18,6 @@ const STATES = [
   { key: 'released', value: 'Released' },
   { key: 'archived', value: 'Archived' },
 ];
-
-const MODES = {
-  ADD: 'add',
-  NONE: 'none',
-};
 
 const initialBoard = {
   columns: STATES.map((column) => ({
@@ -38,7 +31,7 @@ const initialBoard = {
 const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
-  const [mode, setMode] = useState(MODES.NONE);
+
   const loadColumn = (state, page, perPage) => {
     return TasksRepository.index({
       q: { stateEq: state },
@@ -61,16 +54,20 @@ const TaskBoard = () => {
   const loadColumnMore = (state, page = 1, perPage = 10) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => {
+        const { cards } = prevState[state];
         return {
           ...prevState,
-          [state]: { cards: prevState[state].cards.concat(data.items), meta: data.meta },
+          [state]: {
+            cards: [...cards, ...data.items],
+            meta: data.meta,
+          },
         };
       });
     });
   };
 
   const generateBoard = () => {
-    const board = {
+    const generatedBoard = {
       columns: STATES.map(({ key, value }) => {
         return {
           id: key,
@@ -81,7 +78,7 @@ const TaskBoard = () => {
       }),
     };
 
-    setBoard(board);
+    setBoard(generatedBoard);
   };
 
   const loadBoard = () => {
@@ -100,16 +97,22 @@ const TaskBoard = () => {
         loadColumnInitial(source.fromColumnId);
       })
       .catch((error) => {
-        alert('Move failed! ${error.message}');
+        alert(`Move failed! ${error.message}`);
       });
   };
 
-  const handleOpenAddPopup = () => {
-    setMode(MODES.ADD);
+  const MODES = {
+    ADD: 'add',
+    NONE: 'none',
+    EDIT: 'edit',
   };
+
+  const [mode, setMode] = useState(MODES.NONE);
+  const [openedTaskId, setOpenedTaskId] = useState(null);
 
   const handleClose = () => {
     setMode(MODES.NONE);
+    setOpenedTaskId(null);
   };
 
   const handleTaskCreate = (params) => {
@@ -120,22 +123,58 @@ const TaskBoard = () => {
     });
   };
 
+  const loadTask = (id) => {
+    return TasksRepository.show(id).then(({ data: { task } }) => task);
+  };
+
+  const handleTaskUpdate = (task) => {
+    const attributes = TaskForm.attributesToSubmit(task);
+
+    return TasksRepository.update(task.id, attributes).then(() => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
+  const handleTaskDestroy = (task) => {
+    return TasksRepository.destroy(task.id).then(() => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
+  const handleOpenEditPopup = (task) => {
+    setOpenedTaskId(task.id);
+    setMode(MODES.EDIT);
+  };
+
+  const handleOpenAddPopup = () => {
+    setMode(MODES.ADD);
+  };
+
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
     <>
-      <Fab className={useStyles.addButton} color="primary" aria-label="add" onClick={handleOpenAddPopup}>
-        <Icon>add</Icon>
-        {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
-      </Fab>
       <KanbanBoard
         renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
-        renderCard={(card) => <Task task={card} />}
+        renderCard={(card) => <Task onClick={handleOpenEditPopup} task={card} />}
         onCardDragEnd={handleCardDragEnd}
       >
         {board}
       </KanbanBoard>
+      <AddButton onClick={handleOpenAddPopup} />
+      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
+      {mode === MODES.EDIT && (
+        <EditPopup
+          onLoadCard={loadTask}
+          onCardDestroy={handleTaskDestroy}
+          onCardUpdate={handleTaskUpdate}
+          onClose={handleClose}
+          cardId={openedTaskId}
+        />
+      )}
     </>
   );
 };
