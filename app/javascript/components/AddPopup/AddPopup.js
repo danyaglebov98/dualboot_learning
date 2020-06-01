@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { has } from 'ramda';
 
 import Button from '@material-ui/core/Button';
@@ -12,23 +12,23 @@ import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
-import Taskform from 'forms/TaskForm';
+import TaskForm from 'forms/TaskForm';
 
 import useStyles from './useStyles';
 
 const AddPopup = ({ onClose, onCreateCard }) => {
-  const [task, changeTask] = useState(Taskform.defaultAttributes());
+  const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
-  const [errors, SetErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const handleCreate = () => {
     setSaving(true);
 
     onCreateCard(task).catch((error) => {
       setSaving(false);
-      SetErrors(error || {});
+      setErrors(error || {});
 
       if (error instanceof Error) {
-        alert('Creation failed! Error: ${error.message}');
+        alert(`Creation Failed! Error: ${error.message}`);
       }
     });
   };
@@ -79,8 +79,8 @@ const AddPopup = ({ onClose, onCreateCard }) => {
 };
 
 AddPopup.propTypes = {
-  onClose: Proptypes.func.isRequired,
-  onCreateCard: Proptypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onCreateCard: PropTypes.func.isRequired,
 };
 
 export default AddPopup;
