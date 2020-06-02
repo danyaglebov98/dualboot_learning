@@ -24,8 +24,6 @@ services:
       RAILS_PORT: 3000
       RUBYOPT: -W:no-deprecated -W:no-experimental
     command: bundle exec rails s -b '0.0.0.0' -p 3000
-    tty: true
-    stdin_open: true
 
   db:
     image: postgres:11.4
