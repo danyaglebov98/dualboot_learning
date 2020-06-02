@@ -20,11 +20,8 @@ const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
-  const action = (
-    <IconButton onClick={onClose}>
-      <CloseIcon />
-    </IconButton>
-  )
+  const styles = useStyles();
+
   const handleCreate = () => {
     setSaving(true);
 
@@ -38,7 +35,12 @@ const AddPopup = ({ onClose, onCreateCard }) => {
     });
   };
   const handleChangeTextField = (fieldName) => (event) => changeTask({ ...task, [fieldName]: event.target.value });
-  const styles = useStyles();
+
+  const action = (
+    <IconButton onClick={onClose}>
+      <CloseIcon />
+    </IconButton>
+  );
 
   return (
     <Modal className={styles.modal} open onClose={onClose}>

@@ -33,6 +33,7 @@ end
 
   def destroy
     task = Task.find(params[:id])
+    task.descroy
 
     respond_with(task)
   end
