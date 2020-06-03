@@ -11,16 +11,20 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
-
 import TaskForm from 'forms/TaskForm';
-
+import UserSelect from 'components/UserSelect';
 import useStyles from './useStyles';
+import TaskPresenter from '../../presenters/TaskPresenter';
+import { isNil } from 'ramda';
 
 const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const styles = useStyles();
+  const isLoading = isNil(task);
+
+  const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
 
   const handleCreate = () => {
     setSaving(true);
@@ -52,7 +56,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
               error={has('name', errors)}
               helperText={errors.name}
               onChange={handleChangeTextField('name')}
-              value={task.name}
+              value={TaskPresenter.name(task)}
               label="Name"
               required
               margin="dense"
@@ -61,10 +65,19 @@ const AddPopup = ({ onClose, onCreateCard }) => {
               error={has('description', errors)}
               helperText={errors.description}
               onChange={handleChangeTextField('description')}
-              value={task.description}
+              value={TaskPresenter.description(task)}
               label="Description"
               required
               margin="dense"
+            />
+            <UserSelect
+              label="Assignee"
+              value={isLoading ? null : task.assignee}
+              onChange={handleChangeSelect('assignee')}
+              isRequired
+              error={has('assignee', errors)}
+              helperText={errors.assignee}
+              isClearable
             />
           </div>
         </CardContent>
