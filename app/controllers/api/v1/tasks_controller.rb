@@ -41,6 +41,7 @@ end
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state_event)
+    params.require(:task).permit(:name, :description, :assignee_id,  :state_event)
+
   end
 end
