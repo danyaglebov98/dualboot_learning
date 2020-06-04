@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { has } from 'ramda';
 import TextField from '@material-ui/core/TextField';
