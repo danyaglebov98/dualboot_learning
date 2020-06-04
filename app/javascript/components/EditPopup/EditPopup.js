@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { isNil } from 'ramda';
+import { isNil, has } from 'ramda';
 import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,12 +14,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Form from './components/Form';
 
 import useStyles from './useStyles';
+import TaskPresenter from '../../presenters/TaskPresenter';
+import UserSelect from 'components/UserSelect';
 
 const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const styles = useStyles();
+
   const action = (
     <IconButton onClick={onClose}>
       <CloseIcon />
@@ -41,6 +44,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       }
     });
   };
+  const handleChangeSelect = (fieldName) => (user) => setTask({ ...task, [fieldName]: user });
 
   const handleCardDestroy = () => {
     setSaving(true);
@@ -58,7 +62,11 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       <Card className={styles.root}>
         <CardHeader
           action={action}
-          title={isLoading ? 'Your task is loading. Please be patient.' : `Task # ${task.id} [${task.name}]`}
+          title={
+            isLoading
+              ? 'Your task is loading. Please be patient.'
+              : `Task # ${TaskPresenter.id(task)} [${TaskPresenter.name(task)}]`
+          }
         />
         <CardContent>
           {isLoading ? (
@@ -66,7 +74,18 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <Form errors={errors} onChange={setTask} task={task} />
+            <>
+              <Form errors={errors} onChange={setTask} task={task} />
+              <UserSelect
+                label="Assignee"
+                value={task.assignee}
+                onChange={handleChangeSelect('assignee')}
+                isRequired
+                error={has('assignee', errors)}
+                helperText={errors.assignee}
+                isClearable
+              />
+            </>
           )}
         </CardContent>
         <CardActions className={styles.actions}>

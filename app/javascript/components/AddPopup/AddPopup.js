@@ -15,14 +15,12 @@ import TaskForm from 'forms/TaskForm';
 import UserSelect from 'components/UserSelect';
 import useStyles from './useStyles';
 import TaskPresenter from '../../presenters/TaskPresenter';
-import { isNil } from 'ramda';
 
 const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const styles = useStyles();
-  const isLoading = isNil(task);
 
   const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
 
@@ -72,7 +70,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
             />
             <UserSelect
               label="Assignee"
-              value={isLoading ? null : task.assignee}
+              value={task.assignee}
               onChange={handleChangeSelect('assignee')}
               isRequired
               error={has('assignee', errors)}
