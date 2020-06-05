@@ -10,7 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import UsersRepository from 'repositories/UsersRepository';
 
 import useStyles from './useStyles';
-import UserPresenter from '../../presenters/UserPresenter';
+import UserPresenter from 'presenters/UserPresenter';
 
 const UserSelect = ({ error, label, isClearable, isRequired, onChange, value, helperText }) => {
   const [isFocused, setFocus] = useState(false);
@@ -50,7 +50,7 @@ UserSelect.propTypes = {
   isClearable: PropTypes.bool.isRequired,
   isRequired: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.shape().isRequired]),
+  value: PropTypes.oneOfType([PropTypes.string.isRequired, UserPresenter.shape().isRequired]),
   helperText: PropTypes.string,
 };
 UserSelect.defaultProps = {
