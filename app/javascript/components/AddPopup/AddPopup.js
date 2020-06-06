@@ -15,6 +15,7 @@ import TaskForm from 'forms/TaskForm';
 import UserSelect from 'components/UserSelect';
 import useStyles from './useStyles';
 import TaskPresenter from 'presenters/TaskPresenter';
+import UserPresenter from 'presenters/UserPresenter';
 
 const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
@@ -70,7 +71,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
             />
             <UserSelect
               label="Assignee"
-              value={task.assignee}
+              value={UserPresenter.assignee}
               onChange={handleChangeSelect('assignee')}
               isRequired
               error={has('assignee', errors)}

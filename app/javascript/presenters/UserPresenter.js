@@ -6,6 +6,7 @@ export default new PropTypesPresenter(
     id: PropTypes.number,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
+    asignee: PropTypes.arrayOf(PropTypes.string),
   },
   {
     fullName(user) {
