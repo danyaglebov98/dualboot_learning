@@ -5,10 +5,12 @@ import TextField from '@material-ui/core/TextField';
 import useStyles from './useStyles';
 import TaskPresenter from 'presenters/TaskPresenter';
 import UserPresenter from 'presenters/UserPresenter';
+import UserSelect from 'components/UserSelect';
 
 const Form = ({ errors, onChange, task }) => {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const styles = useStyles();
+  const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
 
   return (
     <form className={styles.root}>
@@ -30,6 +32,15 @@ const Form = ({ errors, onChange, task }) => {
         required
         multiline
         margin="dense"
+      />
+      <UserSelect
+        label="Assignee"
+        value={task.assignee}
+        onChange={handleChangeSelect('assignee')}
+        isRequired
+        error={has('assignee', errors)}
+        helperText={errors.assignee}
+        isClearable
       />
     </form>
   );

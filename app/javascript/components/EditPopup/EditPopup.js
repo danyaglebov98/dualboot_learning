@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { isNil, has } from 'ramda';
+import { isNil } from 'ramda';
 import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,8 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Form from './components/Form';
 
 import useStyles from './useStyles';
-import TaskPresenter from '../../presenters/TaskPresenter';
-import UserSelect from 'components/UserSelect';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
   const [task, setTask] = useState(null);
@@ -44,7 +43,6 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       }
     });
   };
-  const handleChangeSelect = (fieldName) => (user) => setTask({ ...task, [fieldName]: user });
 
   const handleCardDestroy = () => {
     setSaving(true);
@@ -74,18 +72,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <>
-              <Form errors={errors} onChange={setTask} task={task} />
-              <UserSelect
-                label="Assignee"
-                value={task.assignee}
-                onChange={handleChangeSelect('assignee')}
-                isRequired
-                error={has('assignee', errors)}
-                helperText={errors.assignee}
-                isClearable
-              />
-            </>
+            <Form errors={errors} onChange={setTask} task={task} />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
