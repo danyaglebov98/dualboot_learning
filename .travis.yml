@@ -1,6 +1,12 @@
+language:
+  - ruby
+os:
+  -linux
+dist:
+  - xenial
 sudo: required
 services:
-  -docker
+  - docker
 env:
   - DOCKER_COMPOSE_VERSION=1.22.0
 before_install:
@@ -9,6 +15,6 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose build
-  - docker-compose run --rm web /bin/sh -c "bundle install; RAILS_ENV=test  bundle exec rails db:create db:migrate"
+  - docker-compose run --rm web /bin/sh -c "bundle install; yarn install; RAILS_ENV=test  bundle exec rails db:create db:migrate; rails assets:precompile"
 script:
   - docker-compose run --rm web /bin/sh -c "RAILS_ENV=test  bundle exec rake test"
