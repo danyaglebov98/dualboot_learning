@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Form from './components/Form';
+import Form from 'components/Form';
 
 import useStyles from './useStyles';
 import TaskPresenter from 'presenters/TaskPresenter';
