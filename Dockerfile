@@ -15,6 +15,8 @@ WORKDIR $RAILS_ROOT
 COPY Gemfile Gemfile.lock  ./
 RUN bundle install --jobs 5
 
+RUN yarn add global heroku
+
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
