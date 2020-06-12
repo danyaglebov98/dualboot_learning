@@ -1,5 +1,5 @@
 # README
-[![Build Status](https://travis-ci.com/danyaglebov98/dualboot_learning.svg?branch=develop)](https://travis-ci.com/danyaglebov98/dualboot_learning)
+[![Build Status](https://travis-ci.com/danyaglebov98/dualboot_learning.svg?branch=feature%2Ftravis)](https://travis-ci.com/danyaglebov98/dualboot_learning)
 [![Coverage Status](https://coveralls.io/repos/github/danyaglebov98/dualboot_learning/badge.svg?branch=develop)](https://coveralls.io/github/danyaglebov98/dualboot_learning?branch=develop)
 This README would normally document whatever steps are necessary to get the
 application up and running.

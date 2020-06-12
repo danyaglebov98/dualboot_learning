@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import TaskForm from 'forms/TaskForm';
 import useStyles from './useStyles';
-import Form from 'components/EditPopup/components/Form';
+import Form from 'components/Form';
 
 const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
