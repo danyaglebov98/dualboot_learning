@@ -5,6 +5,7 @@ export default {
     return {
       name: '',
       description: '',
+      asignee: {},
       ...attributes,
     };
   },
