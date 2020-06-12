@@ -5,6 +5,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     tasks = Task.
       ransack(ransack_params).
       result.
+      includes(:author, :assignee).
       page(page).
       per(per_page)
 
