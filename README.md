@@ -1,6 +1,6 @@
 # README
-# TRAVIS CI
 
+# TRAVIS CI
 [![Build Status](https://travis-ci.com/danyaglebov98/dualboot_learning.svg?branch=feature%2Ftravis)](https://travis-ci.com/danyaglebov98/dualboot_learning)
 
 # COVERALLS
