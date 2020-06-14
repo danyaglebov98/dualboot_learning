@@ -8,6 +8,7 @@ ruby '2.7.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'rollbar'
+gem 'newrelic_rpm'
 gem 'puma', '~> 4.1'
 
 # Use SCSS for stylesheets

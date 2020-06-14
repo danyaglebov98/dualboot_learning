@@ -1,0 +1,22 @@
+common: &default_settings
+  license_key: eu01xx8bded157ccb53bbfc99063e74f84ccNRAL
+
+  app_name: Task Manager
+
+  log_level: info
+
+development:
+  <<: *default_settings
+  app_name: Task Manager (Development)
+
+test:
+  <<: *default_settings
+  # It doesn't make sense to report to New Relic from automated test runs.
+  monitor_mode: false
+
+staging:
+  <<: *default_settings
+  app_name: Task Manager (Staging)
+
+production:
+  <<: *default_settings
