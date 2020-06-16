@@ -60,6 +60,5 @@ group :test do
   gem 'webdrivers'
 
   gem 'simplecov', require: false
-  gem 'coveralls', require: false
-
+  gem 'coveralls', '>=0.8.1', require: false
 end
