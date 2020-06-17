@@ -10,7 +10,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
       per(per_page)
 
     respond_with(tasks, each_serializer: TaskSerializer, root: 'items', meta: build_meta(tasks))
-end
+  end
 
   def show
     task = Task.find(params[:id])
@@ -20,6 +20,7 @@ end
 
   def create
     task = current_user.my_tasks.new(task_params)
+
     if task.save
       UserMailer.with({ user: current_user, task: task }).task_created.deliver_now
     end
@@ -29,14 +30,19 @@ end
 
   def update
     task = Task.find(params[:id])
-    task.update(task_params)
+    byebug
 
+    if task.update(task_params)
+      UserMailer.with({ user: current_user, task: task }).task_updated.deliver_now
+    end
     respond_with(task, serializer: TaskSerializer)
   end
 
   def destroy
     task = Task.find(params[:id])
-    task.destroy
+    if task.destroy
+      UserMailer.with({ user: current_user, task: task }).task_destroy.deliver_now
+    end
 
     respond_with(task)
   end
