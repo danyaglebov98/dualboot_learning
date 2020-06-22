@@ -29,7 +29,6 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Updated', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was updated")
   end
 
   test "task destroy" do
@@ -45,6 +44,5 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Destroy', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was destroy")
   end
 end

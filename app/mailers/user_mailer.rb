@@ -22,9 +22,9 @@ class UserMailer < ApplicationMailer
     mail(to: user.email, subject: 'Task Destroy')
   end
 
-  def forgot_password(user)
-    @user = user
-    @greeting = "Cool!"
+  def reset_password
+    @user = params[:user]
 
-    mail(to: user.email, :subject => 'Reset password instructions')
+    mail(to: @user.email, subject: 'Reset password')
+  end
 end

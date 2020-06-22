@@ -45,6 +45,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   test 'should patch update' do
     user = create(:user)
     user_attrs = attributes_for(:user)
+    byebug
     patch :update, params: { id: user.id, user: user_attrs }
     assert_response :redirect
     updated_user = User.find_by(email: user_attrs[:email])
