@@ -10,21 +10,23 @@ class Web::PasswordResetsController < Web::ApplicationController
     if @reset_password.valid?
       user.generate_password_reset
       UserMailer.with({ user: user }).reset_password.deliver_now
-      render(:congratulation)
+      render('congratulation')
     else
       render(:new)
     end
   end
 
   def edit
+    give_an_error_message
+  end
+
+  def give_an_error_message
     @user = User.find_by_password_reset_token!(params[:id])
-    return render(:error) if @user.password_reset_sent_at < 24.hours.ago
+    return render(:give_an_error_message) if @user.password_reset_token_is_dead?
   end
 
   def update
-    @user = User.find_by_password_reset_token!(params[:id])
-    if @user.password_reset_sent_at < 24.hours.ago
-      render(:error)
+    if give_an_error_message
     elsif @user.update(user_params)
       redirect_to(new_session_path)
     else

@@ -32,7 +32,7 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
     user.update(password_reset_sent_at: 25.hours.ago)
     get :edit, params: { id: user.password_reset_token }
     assert_response :success
-    assert_template :error
+    assert_template :give_an_error_message
   end
 
   test 'put update should redirect_to new_session' do
@@ -48,6 +48,6 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
     user.update(password_reset_sent_at: 25.hours.ago)
     put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) } }
     assert_response :success
-    assert_template :error
+    assert_template :give_an_error_message
   end
 end
