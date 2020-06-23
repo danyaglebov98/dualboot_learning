@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class Web::PasswordResetsControllerTest < ActionController::TestCase
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
@@ -29,7 +29,7 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
   test 'get edit should return error' do
     user = create(:user)
     user.generate_password_reset
-    user.update( password_reset_sent_at: 25.hours.ago )
+    user.update(password_reset_sent_at: 25.hours.ago)
     get :edit, params: { id: user.password_reset_token }
     assert_response :success
     assert_template :error
@@ -38,15 +38,15 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
   test 'put update should redirect_to new_session' do
     user = create(:user)
     user.generate_password_reset
-    put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) }}
+    put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) } }
     assert_response :redirect
   end
 
   test 'put update should return error' do
     user = create(:user)
     user.generate_password_reset
-    user.update( password_reset_sent_at: 25.hours.ago )
-    put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) }}
+    user.update(password_reset_sent_at: 25.hours.ago)
+    put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) } }
     assert_response :success
     assert_template :error
   end

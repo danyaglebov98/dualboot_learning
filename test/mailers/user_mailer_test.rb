@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
-  test "task created" do
+  test 'task created' do
     user = create(:user)
     task = create(:task, author: user)
     params = { user: user, task: task }
@@ -16,7 +16,7 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal 'New Task Created', email.subject
   end
 
-  test "task updated" do
+  test 'task updated' do
     user = create(:user)
     task = create(:task, author: user)
     params = { user: user, task: task }
@@ -31,7 +31,7 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal 'Task Updated', email.subject
   end
 
-  test "task destroy" do
+  test 'task destroy' do
     user = create(:user)
     task = create(:task, author: user)
     params = { user: user, task: task }

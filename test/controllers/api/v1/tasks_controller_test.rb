@@ -14,10 +14,10 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
   end
 
   test 'should post create' do
-    author = create :user
+    author = create(:user)
     sign_in(author)
 
-    assignee = create :user
+    assignee = create(:user)
     task_attributes = attributes_for(:task).merge({ assignee_id: assignee.id })
 
     assert_emails 1 do

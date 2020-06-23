@@ -3,7 +3,6 @@ class ResetForm
 
   attr_accessor :email
 
-
   validates :email, presence: true, format: { with: /\A\S+@.+\.\S+\z/ }
   validate :user_valid?
 
