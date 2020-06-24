@@ -29,7 +29,7 @@ gem 'slim-rails'
 
 #active Job
 gem 'sidekiq'
-
+gem 'sidekiq-failures'
 # adminka
 gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'

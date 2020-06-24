@@ -37,7 +37,7 @@ services:
     environment: *web-environment
     volumes: *web-volumes
     depends_on:
-      -redis
+      - redis
 
   db:
     image: postgres:11.4
