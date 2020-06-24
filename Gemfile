@@ -30,6 +30,8 @@ gem 'slim-rails'
 #active Job
 gem 'sidekiq'
 gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
+
 # adminka
 gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'

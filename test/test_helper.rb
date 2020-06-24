@@ -14,4 +14,5 @@ class ActiveSupport::TestCase
   include ActionMailer::TestHelper
   include FactoryBot::Syntax::Methods
   include AuthHelper
+  Sidekiq::Testing.inline!
 end
