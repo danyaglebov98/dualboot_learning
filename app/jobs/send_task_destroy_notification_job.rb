@@ -1,12 +1,11 @@
-class SendTaskCreateNotificationJob < ApplicationJob
+class SendTaskDestroyNotificationJob < ApplicationJob
     sidekiq_options queue: :mailers
     sidekiq_throttle_as :mailer
     sidekiq_options lock: :until_and_while_executing, on_conflict: { client: :log, server: :reject }
 
-    def perform(task_id)
-      task = Task.find_by(id: task_id)
-      return if task.blank?
+    def perform(task_id, author_id)
+      author = User.find_by(id: author_id)
 
-      UserMailer.with(user: task.author, task: task).task_destroy.deliver_now
+      UserMailer.with(user: author, task_id: task_id).task_destroy.deliver_now
     end
   end

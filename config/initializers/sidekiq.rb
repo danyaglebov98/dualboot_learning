@@ -13,3 +13,4 @@ end
 
 Sidekiq::Throttled.setup!
 Sidekiq::Throttled::Registry.add(:mailer, { threshold: { limit: 1, period: 5.seconds } })
+Redis.exists_returns_integer = false

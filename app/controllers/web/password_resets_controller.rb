@@ -9,7 +9,7 @@ class Web::PasswordResetsController < Web::ApplicationController
 
     if @reset_password.valid?
       user.generate_password_reset
-      SendPasswordResetsNotificationJob.parform_async(user.id, user.password_reset_token)
+      SendPasswordResetsNotificationJob.perform_async(user.id)
       render('congratulation')
     else
       render(:new)
