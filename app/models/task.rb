@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  has_one_attached :image
   state_machine initial: :new_task do
     state :new_task
     state :in_development
