@@ -39,7 +39,9 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
     user = create(:user)
     user.generate_password_reset
     put :update, params: { id: user.password_reset_token, developer: { password: generate(:string) } }
+    user.del_password_reset_token_and_sent_at
     assert_response :redirect
+    assert_nil user.password_reset_token
   end
 
   test 'put update should return error' do

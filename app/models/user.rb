@@ -20,4 +20,9 @@ class User < ApplicationRecord
   def password_reset_token_is_dead?
     password_reset_sent_at < ALL_DAY_TIME.ago
   end
+
+  def del_password_reset_token_and_sent_at
+    self.password_reset_token = nil
+    self.password_reset_sent_at = nil
+  end
 end
