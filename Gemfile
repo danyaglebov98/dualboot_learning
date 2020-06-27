@@ -29,6 +29,9 @@ gem 'slim-rails'
 
 #files
 gem 'mini_magick'
+gem 'virtus'
+gem 'file_validators'
+gem "aws-sdk-s3", require: false
 
 #active Job
 gem 'sidekiq'

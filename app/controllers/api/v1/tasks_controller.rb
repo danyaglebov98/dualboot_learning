@@ -78,4 +78,8 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   def task_params
     params.require(:task).permit(:name, :description, :assignee_id, :state_event)
   end
+
+  def attachment_params
+    params.require(:attachment).permit(:image, :crop_x, :crop_y, :crop_width, :crop_height)
+  end
 end
