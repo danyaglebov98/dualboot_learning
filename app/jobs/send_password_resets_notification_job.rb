@@ -4,8 +4,7 @@ class SendPasswordResetsNotificationJob < ApplicationJob
   sidekiq_options lock: :until_and_while_executing, on_conflict: { client: :log, server: :reject }
 
   def perform(user_id)
-    user = User.find_by(id: user_id)
-    return if user.blank?
+    user = User.find(user_id)
 
     UserMailer.with(user: user).reset_password.deliver_now
   end
