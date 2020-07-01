@@ -27,7 +27,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails'
 
-#active Job
+# active Job
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidekiq-throttled'
