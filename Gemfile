@@ -27,13 +27,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails'
 
-#files
+# files
 gem 'mini_magick'
 gem 'virtus'
 gem 'file_validators'
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false
 
-#active Job
+# active Job
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidekiq-throttled'
