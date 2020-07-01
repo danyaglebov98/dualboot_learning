@@ -4,7 +4,7 @@ class ResetForm
   attr_accessor :email
 
   validates :email, presence: true, format: { with: /\A\S+@.+\.\S+\z/ }
-  validate :user_valid?
+  validate :check_user_presence
 
   def user
     User.find_by(email: email)
@@ -12,7 +12,11 @@ class ResetForm
 
   private
 
+  def check_user_presence
+    errors.add(:email, "user wasn't found") unless user_valid?
+  end
+
   def user_valid?
-    errors.add(:email, "user wasn't found") if user.blank?
+    user.present?
   end
 end

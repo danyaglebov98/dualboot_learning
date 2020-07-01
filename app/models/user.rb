@@ -11,7 +11,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, format: { with: /\A\S+@.+\.\S+\z/, message: '%{value} is not valid!' }, presence: true
 
   def generate_password_reset
-    self.password_reset_token = nil
     self.password_reset_token = SecureRandom.urlsafe_base64
     self.password_reset_sent_at = Time.zone.now
     save!
@@ -21,7 +20,7 @@ class User < ApplicationRecord
     password_reset_sent_at < ALL_DAY_TIME.ago
   end
 
-  def del_password_reset_token_and_sent_at
+  def delete_password_reset_token
     self.password_reset_token = nil
     self.password_reset_sent_at = nil
   end
