@@ -10,9 +10,11 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 
+Sidekiq::Testing.inline!
+
 class ActiveSupport::TestCase
   include ActionMailer::TestHelper
   include FactoryBot::Syntax::Methods
   include AuthHelper
-  Sidekiq::Testing.inline!
+  parallelize(workers: 1)
 end
