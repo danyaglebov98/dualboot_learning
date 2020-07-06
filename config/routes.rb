@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :tasks, only: [:index, :show, :create, :update, :destroy] do
         member do
-          get "remove_image"
-          get "attach_image"
+          put "remove_image"
+          put "attach_image"
         end
       end
       resources :users, only: [:index, :show]
