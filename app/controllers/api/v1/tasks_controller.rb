@@ -3,10 +3,10 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def index
     tasks = Task.
+      with_attached_image.
+      includes(:author, :assignee).
       ransack(ransack_params).
       result.
-      includes(:author, :assignee).
-      with_attached_image.
       page(page).
       per(per_page)
 

@@ -68,7 +68,6 @@ export default {
       const body = decamelize(json);
       body.attachment.image = image;
       const formData = objectToFormData(body);
-
       return axios
         .put(url, formData, {
           headers: {
