@@ -27,4 +27,4 @@ class TaskAttachImageForm
   def cropping?
     [crop_width, crop_height, crop_x, crop_y].all?(&:present?)
   end
-  end
+end
