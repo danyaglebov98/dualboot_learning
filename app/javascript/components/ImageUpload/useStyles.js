@@ -1,14 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-
-  preview: {
-    width: '80%',
+  crop: {
+    maxHeight: 300,
+    maxWidth: 300,
   },
 }));
-
 export default useStyles;

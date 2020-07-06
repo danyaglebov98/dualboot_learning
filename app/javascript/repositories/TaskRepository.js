@@ -31,4 +31,10 @@ export default {
 
     return FetchHelper.delete(path);
   },
+
+  updateImage(id, attachment) {
+    const path = routes.apiV1Path(id);
+
+    return FetchHelper.putFormData(path, attachment);
+  },
 };
