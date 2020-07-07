@@ -6,6 +6,7 @@ export default new PropTypesPresenter({
   name: PropTypes.string,
   description: PropTypes.string,
   assignee: PropTypes.shape(),
+  imageUrl: PropTypes.string,
   state: PropTypes.string,
   expired_at: PropTypes.string,
   transitions: PropTypes.arrayOf(PropTypes.string),
