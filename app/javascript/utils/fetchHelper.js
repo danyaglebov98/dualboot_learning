@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import objectToFormData from 'object-to-formdata';
+import { serialize } from 'object-to-formdata';
 import { camelize, decamelize } from './keysConverter';
 
 function authenticityToken() {
@@ -67,8 +67,7 @@ export default {
       const { image } = json.attachment;
       const body = decamelize(json);
       body.attachment.image = image;
-      const formData = objectToFormData(body);
-
+      const formData = serialize(body);
       return axios
         .put(url, formData, {
           headers: {

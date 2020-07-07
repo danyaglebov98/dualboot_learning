@@ -4,6 +4,7 @@ import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import Button from '@material-ui/core/Button';
 import { isNil, path } from 'ramda';
 import PropTypes from 'prop-types';
+import 'react-image-crop/dist/ReactCrop.css';
 
 const ImageUpload = ({ onUpload }) => {
   const DEFAULT_CROP_PARAMS = {
