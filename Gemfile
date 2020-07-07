@@ -27,6 +27,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails'
 
+# active Job
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
+gem 'sidekiq-unique-jobs', '~> 6.0.13'
+
 # adminka
 gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'

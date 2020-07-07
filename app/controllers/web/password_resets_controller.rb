@@ -9,7 +9,7 @@ class Web::PasswordResetsController < Web::ApplicationController
 
     if @reset_password.valid?
       user.generate_password_reset
-      UserMailer.with({ user: user }).reset_password.deliver_now
+      SendPasswordResetsNotificationJob.perform_async(user.id)
       render('congratulation')
     else
       render(:new)
